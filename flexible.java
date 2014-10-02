@@ -33,6 +33,7 @@ public class flexible
             if(spaces.get(i) == spaces.get(i+1))
             {
                 spaces.remove(i);
+                i = i -1;
             }
         }
         for(int i = 0; i < spaces.size(); i++)
