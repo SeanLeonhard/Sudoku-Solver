@@ -25,7 +25,7 @@ public class queens {
             lines[a] = scan.next();
             if(lines[a].length() != 8 )
             {
-                System.out.println("invalid\n");
+                System.out.println("invalid");
                 System.exit(0);
             }
             a++;
@@ -35,18 +35,18 @@ public class queens {
             for(int i = 0; i < 8; i++)
             {
                 board[j][i] = lines[j].substring(i,i+1);
-                //System.out.print(board[j][i]);
             }
-            //System.out.println();
         }
         int[] length = new int[8];
         int[] height = new int[8];
+        int count = 0;
         for(int i = 0; i < 8; i++)
         {
             for(int j = 0; j < 8; j++)
             {
                 if(board[i][j].equals("*"))
                 {
+                    count++;
                     length[i] = length[i] + 1;
                     height[j] = height[j] + 1;
                     int counter = 1;
@@ -54,7 +54,7 @@ public class queens {
                     {   
                         if(board[i-counter][j-counter].equals("*"))
                         {   
-                            System.out.println("invalid\n");
+                            System.out.println("invalid");
                             System.exit(0);
                         }
                         counter++;
@@ -64,25 +64,47 @@ public class queens {
                     {
                         if(board[i+counter][j+counter].equals("*"))
                         {   
-                            System.out.println("invalid\n");
+                            System.out.println("invalid");
                             System.exit(0);
                         }
                         counter++;
                     }
+                    counter = 1;
+                    while(i+counter < 8 && j-counter > -1)
+                    {
+                        if(board[i+counter][j-counter].equals("*"))
+                        {
+                            System.out.println("invalid");
+                            System.exit(0);
+                        }
+                    }
+                    counter = 1;
+                    while(i-counter > -1 && j+counter <8)
+                    {
+                        if(board[i-counter][j+counter].equals("*"))
+                        {
+                            System.out.println("invalid");
+                            System.exit(0);
+                        }
+                    }
                 }
             }
+        }
+        if(count != 8)
+        {
+            return false;
         }
         for(int i = 0; i < 8; i++)
         {
             if(height[i] > 1 || length[i] > 1)
             {
-                System.out.println("invalid\n");
+                System.out.println("invalid");
                 System.exit(0);
             }
         }
         
         
-        System.out.println("valid\n");
+        System.out.println("valid");
         System.exit(0);
     }
 }
